@@ -41,3 +41,32 @@ const person2: {
 } = {
     role: Role.ADMIN
 }
+
+// Function as type
+function add(n1: number, n2:number) {
+    return n1 + n2;
+}
+
+let combined: Function;
+let comb: (a: number, b: number) => number;
+
+function addAndHandle (n1: number, n2: number, cb: (a: number) => void) {
+    const result = n1 + n2;
+    cb(result)
+}
+
+addAndHandle(10,20, () => {})
+
+// unknown type, nezināma vērtība, bet konkrētāka kā any type. Labāka opcija kā any
+let userInput: unknown;
+
+if (typeof userInput === "string") {
+    // Darām
+}
+
+// never type, never produces return value
+function generateError(message: string, errorCode: number): never {
+    throw { message: message, errorCode: errorCode }
+}
+
+generateError("An error occured", 500);
