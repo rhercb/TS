@@ -34,3 +34,29 @@ const mergedObject2 = merge<{name: string}, {age: number}>({name: "Ricards"}, {a
 function merge3<T extends object, U extends object>(objA: T, objB: U) {
     return Object.assign(objA, objB)
 }
+
+// typeof constraint.
+function extractAndConvert<T extends object, U extends keyof T>(obj: object, key: string) {
+    return obj[key]
+}
+
+// Generic utility types
+
+interface CourseGoal {
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+// Partial - wraps type where all properties are optional;
+function createCourseGoal(title: string, description: string, completeUntil: Date): CourseGoal {
+    let course: Partial<CourseGoal> = {};
+    course.title = title;
+    course.description = description;
+    course.completeUntil = completeUntil;
+    return course as CourseGoal;
+}
+
+// Creates array as readonly so that it can not be changed
+const namess: Readonly<string[]> = ["Max", "Sports"];
+// namess.push("Manu")
